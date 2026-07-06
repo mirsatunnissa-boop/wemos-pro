@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.wemos.notification" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>Wemos Notif</name>
+    <description>Wemos IoT Device Notification App with Wake-up Feature</description>
+    <author email="dev@wemos.local" href="https://github.com/mirsatunnissa-boop/wemos-pro">
+        Wemos Pro Developer
+    </author>
+    
+    <!-- Permissions -->
+    <permission name="android.permission.INTERNET" />
+    <permission name="android.permission.ACCESS_NETWORK_STATE" />
+    <permission name="android.permission.CHANGE_NETWORK_STATE" />
+    <permission name="android.permission.WAKE_LOCK" />
+    <permission name="android.permission.DISABLE_KEYGUARD" />
+    <permission name="android.permission.POST_NOTIFICATIONS" />
+    <permission name="android.permission.ACCESS_FINE_LOCATION" />
+    <permission name="android.permission.ACCESS_COARSE_LOCATION" />
+    <permission name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <permission name="android.permission.VIBRATE" />
+    <permission name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    
+    <!-- Platform Settings -->
+    <platform name="android">
+        <preference name="TargetSdkVersion" value="34" />
+        <preference name="AndroidXEnabled" value="true" />
+        <preference name="Orientation" value="portrait" />
+        <preference name="Fullscreen" value="false" />
+        <preference name="BackgroundColor" value="0xffffffff" />
+        <preference name="KeyboardDisplayRequiresUserAction" value="false" />
+        <preference name="GradleVersion" value="7.6" />
+        <preference name="AndroidGradlePluginVersion" value="7.4.2" />
+        <preference name="CompileSdkVersion" value="34" />
+        <preference name="android-minSdkVersion" value="24" />
+        <preference name="android-maxSdkVersion" value="34" />
+        
+        <!-- Network Security Configuration -->
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:name="com.wemos.notification.WakeUpActivity" android:exported="true">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+                </intent-filter>
+            </activity>
+            <receiver android:name="com.wemos.notification.NotificationReceiver" android:exported="true">
+                <intent-filter>
+                    <action android:name="android.intent.action.BOOT_COMPLETED" />
+                </intent-filter>
+            </receiver>
+            <service android:name="com.wemos.notification.WemosConnectionService" android:foregroundServiceType="location" />
+            <uses-library android:name="com.google.android.wearable" android:required="false" />
+        </config-file>
+    </platform>
+    
+    <!-- Content Security Policy -->
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    
+    <!-- Access Origin -->
+    <access origin="*" />
+    
+    <!-- Plugins -->
+    <plugin name="cordova-plugin-device" spec="^2.1.0" />
+    <plugin name="cordova-plugin-splashscreen" spec="^6.0.2" />
+    <plugin name="cordova-plugin-ionic-webview" spec="^5.0.0" />
+    <plugin name="cordova-plugin-ionic-keyboard" spec="^2.2.0" />
+    <plugin name="cordova-plugin-wakeuplocalnotification" spec="^1.0.10" />
+    <plugin name="cordova-plugin-local-notification" spec="^10.1.1" />
+    <plugin name="cordova-plugin-background-mode" spec="^0.7.3" />
+    <plugin name="cordova-plugin-network-information" spec="^3.0.0" />
+    <plugin name="cordova-plugin-app-version" spec="^0.0.7" />
+</widget>
