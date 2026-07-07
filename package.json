@@ -9,7 +9,6 @@
     "build:debug": "cordova build android --debug",
     "run": "cordova run android --device",
     "clean": "cordova clean",
-    "prepare": "cordova prepare android",
     "plugin:add": "cordova plugin add",
     "platform:add": "cordova platform add android"
   },
