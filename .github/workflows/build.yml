@@ -31,7 +31,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          # Tidak menggunakan cache: gradle di sini karena file gradle belum ada
           
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
@@ -60,7 +59,7 @@ jobs:
           cordova plugin add cordova-plugin-local-notification
           cordova plugin add cordova-plugin-background-mode
           cordova plugin add cordova-plugin-network-information
-          cordova plugin add cordova-plugin-app-version
+          cordova plugin add cordova-plugin-app-version   # tanpa versi, ambil terbaru
           
       - name: Prepare project
         run: cordova prepare android
