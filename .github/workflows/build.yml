@@ -47,7 +47,7 @@ jobs:
         run: npm install
         
       - name: Add Android platform
-        run: cordova platform add android@13.0.0
+        run: cordova platform add android@12.0.0
         
       - name: Add all required plugins (latest versions)
         run: |
