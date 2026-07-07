@@ -1,4 +1,3 @@
-
 name: Build Android APK
 
 on:
@@ -63,25 +62,17 @@ jobs:
           cordova plugin add cordova-plugin-network-information
           cordova plugin add cordova-plugin-app-version
           
-      - name: Prepare project (copy www & resources)
+      - name: Prepare project
         run: cordova prepare android
         
       - name: Copy custom Java sources and resources to platform
         run: |
-          # Salin file Java ke platform
           mkdir -p platforms/android/app/src/main/java/com/wemos/notification
           cp -r app/src/main/java/com/wemos/notification/*.java platforms/android/app/src/main/java/com/wemos/notification/ 2>/dev/null || true
-          
-          # Salin resource values dan xml
           cp -r app/src/main/res/values/*.xml platforms/android/app/src/main/res/values/ 2>/dev/null || true
           cp -r app/src/main/res/xml/*.xml platforms/android/app/src/main/res/xml/ 2>/dev/null || true
-          
-          # Salin AndroidManifest.xml (jika ada modifikasi tambahan)
           cp app/src/main/AndroidManifest.xml platforms/android/app/src/main/AndroidManifest.xml 2>/dev/null || true
-          
-          # Salin proguard-rules.pro jika diperlukan
           cp proguard-rules.pro platforms/android/app/ 2>/dev/null || true
-          
           echo "Custom sources copied successfully."
           
       - name: Build Debug APK
@@ -92,7 +83,7 @@ jobs:
         continue-on-error: true
         
       - name: Upload Debug APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: wemos-notification-app-debug.apk
@@ -100,7 +91,7 @@ jobs:
           retention-days: 30
           
       - name: Upload Release APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: wemos-notification-app-release.apk
