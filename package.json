@@ -36,7 +36,7 @@
     "cordova-plugin-wakeuplocalnotification": "^1.0.10",
     "cordova-plugin-local-notification": "^10.1.1",
     "cordova-plugin-background-mode": "^0.7.3",
-    "cordova-plugin-network-information": "^3.0.0",
-    "cordova-plugin-app-version": "^0.0.7"
+    "cordova-plugin-network-information": "^3.0.0"
+    
   }
 }
