@@ -49,7 +49,7 @@ jobs:
       - name: Add Android platform
         run: cordova platform add android@12.0.0
         
-      - name: Add required plugins
+      - name: Add all required plugins (latest versions)
         run: |
           cordova plugin add cordova-plugin-device
           cordova plugin add cordova-plugin-splashscreen
@@ -59,7 +59,7 @@ jobs:
           cordova plugin add cordova-plugin-local-notification
           cordova plugin add cordova-plugin-background-mode
           cordova plugin add cordova-plugin-network-information
-          cordova plugin add cordova-plugin-app-version   # tanpa versi, ambil terbaru
+          cordova plugin add cordova-plugin-app-version
           
       - name: Prepare project
         run: cordova prepare android
