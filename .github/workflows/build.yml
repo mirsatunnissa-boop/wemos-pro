@@ -31,7 +31,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: gradle
+          # Tidak menggunakan cache: gradle di sini karena file gradle belum ada
           
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
@@ -74,6 +74,16 @@ jobs:
           cp app/src/main/AndroidManifest.xml platforms/android/app/src/main/AndroidManifest.xml 2>/dev/null || true
           cp proguard-rules.pro platforms/android/app/ 2>/dev/null || true
           echo "Custom sources copied successfully."
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('platforms/android/**/*.gradle*', 'platforms/android/**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
           
       - name: Build Debug APK
         run: cordova build android --debug
