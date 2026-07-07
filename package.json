@@ -28,15 +28,5 @@
     "@babel/core": "^7.23.0",
     "@babel/preset-env": "^7.23.0"
   },
-  "dependencies": {
-    "cordova-plugin-device": "^2.1.0",
-    "cordova-plugin-splashscreen": "^6.0.2",
-    "cordova-plugin-ionic-webview": "^5.0.0",
-    "cordova-plugin-ionic-keyboard": "^2.2.0",
-    "cordova-plugin-wakeuplocalnotification": "^1.0.10",
-    
-    "cordova-plugin-background-mode": "^0.7.3",
-    "cordova-plugin-network-information": "^3.0.0"
-    
-  }
+  "dependencies": {}
 }
