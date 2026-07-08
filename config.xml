@@ -5,24 +5,26 @@
     <author email="dev@wemos.local" href="https://github.com/mirsatunnissa-boop/wemos-pro">
         Wemos Pro Developer
     </author>
-    
+
     <!-- Permissions -->
-    <permission name="android.permission.INTERNET" />
-    <permission name="android.permission.ACCESS_NETWORK_STATE" />
-    <permission name="android.permission.CHANGE_NETWORK_STATE" />
-    <permission name="android.permission.WAKE_LOCK" />
-    <permission name="android.permission.DISABLE_KEYGUARD" />
-    <permission name="android.permission.POST_NOTIFICATIONS" />
-    <permission name="android.permission.ACCESS_FINE_LOCATION" />
-    <permission name="android.permission.ACCESS_COARSE_LOCATION" />
-    <permission name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <permission name="android.permission.VIBRATE" />
-    <permission name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    
+    <preference name="AndroidXEnabled" value="true" />
+    <config-file target="AndroidManifest.xml" parent="/manifest">
+        <uses-permission android:name="android.permission.INTERNET" />
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+        <uses-permission android:name="android.permission.WAKE_LOCK" />
+        <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+        <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+        <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+        <uses-permission android:name="android.permission.VIBRATE" />
+        <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    </config-file>
+
     <!-- Platform Settings -->
     <platform name="android">
         <preference name="TargetSdkVersion" value="34" />
-        <preference name="AndroidXEnabled" value="true" />
         <preference name="Orientation" value="portrait" />
         <preference name="Fullscreen" value="false" />
         <preference name="BackgroundColor" value="0xffffffff" />
@@ -32,8 +34,8 @@
         <preference name="CompileSdkVersion" value="34" />
         <preference name="android-minSdkVersion" value="24" />
         <preference name="android-maxSdkVersion" value="34" />
-        
-        <!-- Network Security Configuration -->
+
+        <!-- Custom Android Components -->
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <activity android:name="com.wemos.notification.WakeUpActivity" android:exported="true">
                 <intent-filter>
@@ -49,7 +51,7 @@
             <uses-library android:name="com.google.android.wearable" android:required="false" />
         </config-file>
     </platform>
-    
+
     <!-- Content Security Policy -->
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -57,10 +59,17 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
-    
+
     <!-- Access Origin -->
     <access origin="*" />
-    
-    <!-- Plugins -->
-    
+
+    <!-- Plugins yang kompatibel dengan AndroidX -->
+    <plugin name="cordova-plugin-device" spec="latest" />
+    <plugin name="cordova-plugin-splashscreen" spec="latest" />
+    <plugin name="cordova-plugin-ionic-webview" spec="latest" />
+    <plugin name="cordova-plugin-ionic-keyboard" spec="latest" />
+    <plugin name="cordova-plugin-local-notifications" spec="latest" />
+    <plugin name="cordova-plugin-background-mode" spec="latest" />
+    <plugin name="cordova-plugin-network-information" spec="latest" />
+    <plugin name="cordova-plugin-app-version" spec="latest" />
 </widget>
