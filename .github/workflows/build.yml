@@ -26,13 +26,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      # 🔥 Bersihkan total jejak plugin usang
-      - name: Clean all traces of old de.appplant plugin
+      # Bersihkan sisa-sisa plugin lama
+      - name: Clean old plugin references
         run: |
           sed -i '/de.appplant.cordova.plugin.local-notification/d' config.xml
           sed -i '/de.appplant.cordova.plugin.local-notification/d' package.json
           rm -rf plugins platforms
-          echo "Old plugin references completely removed."
+          echo "Cleaned."
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -60,21 +60,23 @@ jobs:
       - name: Add Android platform
         run: cordova platform add android@12.0.0
 
-      - name: Add all required plugins (latest versions)
+      - name: Add required plugins
         run: |
           cordova plugin add cordova-plugin-device
           cordova plugin add cordova-plugin-splashscreen
           cordova plugin add cordova-plugin-ionic-webview
           cordova plugin add cordova-plugin-ionic-keyboard
-          cordova plugin add cordova-plugin-local-notification-11   # ✅ plugin pengganti
           cordova plugin add cordova-plugin-background-mode
           cordova plugin add cordova-plugin-network-information
           cordova plugin add cordova-plugin-app-version
 
+          # ✅ Plugin notifikasi lokal dari fork yang sudah AndroidX
+          cordova plugin add https://github.com/dpa99c/cordova-plugin-local-notifications.git
+
       - name: Prepare project
         run: cordova prepare android
 
-      - name: Copy custom Java sources and resources to platform
+      - name: Copy custom Java sources and resources
         run: |
           mkdir -p platforms/android/app/src/main/java/com/wemos/notification
           cp -r app/src/main/java/com/wemos/notification/*.java platforms/android/app/src/main/java/com/wemos/notification/ 2>/dev/null || true
@@ -82,7 +84,7 @@ jobs:
           cp -r app/src/main/res/xml/*.xml platforms/android/app/src/main/res/xml/ 2>/dev/null || true
           cp app/src/main/AndroidManifest.xml platforms/android/app/src/main/AndroidManifest.xml 2>/dev/null || true
           cp proguard-rules.pro platforms/android/app/ 2>/dev/null || true
-          echo "Custom sources copied successfully."
+          echo "Custom sources copied."
 
       - name: Install Gradle 8.7
         run: |
@@ -103,7 +105,7 @@ jobs:
       - name: Build Debug APK
         run: cordova build android --debug
 
-      - name: Build Release APK (if signing config available)
+      - name: Build Release APK
         run: cordova build android --release
         continue-on-error: true
 
