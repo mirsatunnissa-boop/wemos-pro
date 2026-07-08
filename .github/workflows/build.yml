@@ -66,7 +66,7 @@ jobs:
           cordova plugin add cordova-plugin-splashscreen
           cordova plugin add cordova-plugin-ionic-webview
           cordova plugin add cordova-plugin-ionic-keyboard
-          cordova plugin add cordova-plugin-local-notifications
+          cordova plugin add cordova-plugin-local-notification-11   # ✅ plugin pengganti
           cordova plugin add cordova-plugin-background-mode
           cordova plugin add cordova-plugin-network-information
           cordova plugin add cordova-plugin-app-version
