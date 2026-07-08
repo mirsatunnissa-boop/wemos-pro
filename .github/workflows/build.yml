@@ -43,8 +43,8 @@ jobs:
           npm install -g cordova@12.0.0
           npm install -g @ionic/cli
           
-      - name: Install Node dependencies
-        run: npm install   # Sekarang tidak akan menjalankan prepare karena script dihapus
+      - name: Install Node dependencies (ignore scripts)
+        run: npm install --ignore-scripts   # ← ini kunci penting
         
       - name: Add Android platform
         run: cordova platform add android@12.0.0
