@@ -58,7 +58,7 @@ jobs:
           cordova plugin add cordova-plugin-splashscreen
           cordova plugin add cordova-plugin-ionic-webview
           cordova plugin add cordova-plugin-ionic-keyboard
-          cordova plugin add cordova-plugin-local-notification
+          cordova plugin add cordova-plugin-local-notifications    # ← ganti di sini
           cordova plugin add cordova-plugin-background-mode
           cordova plugin add cordova-plugin-network-information
           cordova plugin add cordova-plugin-app-version
@@ -75,18 +75,6 @@ jobs:
           cp app/src/main/AndroidManifest.xml platforms/android/app/src/main/AndroidManifest.xml 2>/dev/null || true
           cp proguard-rules.pro platforms/android/app/ 2>/dev/null || true
           echo "Custom sources copied successfully."
-
-      # ➕ Langkah perbaikan kompatibilitas Gradle
-      - name: Fix Gradle compatibility issues
-        working-directory: platforms/android
-        run: |
-          # Ganti 'compile' usang dengan 'implementation' di plugin local-notification
-          sed -i 's/compile /implementation /g' cordova-plugin-local-notification/notification-localnotification.gradle
-
-          # Pastikan compileSdkVersion tersedia di app/build.gradle
-          if ! grep -q "compileSdkVersion" app/build.gradle; then
-            sed -i "/android {/a \ \ \ \ compileSdkVersion 34" app/build.gradle
-          fi
 
       - name: Install Gradle 8.7
         run: |
