@@ -49,12 +49,6 @@ jobs:
       - name: Add Android platform
         run: cordova platform add android@12.0.0
 
-      # ⬇️ Langkah tambahan: perbaiki masalah Gradle 9 dengan XmlParser
-      - name: Downgrade Gradle wrapper to 8.7 (fix XmlParser issue)
-        working-directory: platforms/android
-        run: |
-          sed -i 's|distributionUrl=.*|distributionUrl=https\://services.gradle.org/distributions/gradle-8.7-all.zip|' gradle/wrapper/gradle-wrapper.properties
-
       - name: Add all required plugins (latest versions)
         run: |
           cordova plugin add cordova-plugin-device
@@ -91,10 +85,14 @@ jobs:
 
       - name: Build Debug APK
         run: cordova build android --debug
+        env:
+          CORDOVA_ANDROID_GRADLE_DISTRIBUTION_URL: https://services.gradle.org/distributions/gradle-8.7-all.zip
 
       - name: Build Release APK (if signing config available)
         run: cordova build android --release
         continue-on-error: true
+        env:
+          CORDOVA_ANDROID_GRADLE_DISTRIBUTION_URL: https://services.gradle.org/distributions/gradle-8.7-all.zip
 
       - name: Upload Debug APK
         uses: actions/upload-artifact@v4
