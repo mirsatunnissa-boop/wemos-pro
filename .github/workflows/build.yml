@@ -37,7 +37,10 @@ jobs:
         with:
           api-level: 34
           target: google_apis
-          build-tools: 33.0.2   # ← tambahan penting
+
+      # ➕ Pastikan Build Tools 33.0.2 terinstal
+      - name: Install Android Build Tools 33.0.2
+        run: yes | sdkmanager "build-tools;33.0.2"
 
       - name: Install Cordova and Ionic
         run: |
