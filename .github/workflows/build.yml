@@ -37,6 +37,7 @@ jobs:
         with:
           api-level: 34
           target: google_apis
+          build-tools: 33.0.2   # ← tambahan penting
 
       - name: Install Cordova and Ionic
         run: |
@@ -73,7 +74,6 @@ jobs:
           cp proguard-rules.pro platforms/android/app/ 2>/dev/null || true
           echo "Custom sources copied successfully."
 
-      # ➕ Tambahkan langkah instalasi Gradle 8.7
       - name: Install Gradle 8.7
         run: |
           curl -sLO https://services.gradle.org/distributions/gradle-8.7-bin.zip
