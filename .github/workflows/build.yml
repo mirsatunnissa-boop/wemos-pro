@@ -26,12 +26,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      # 🔥 Hapus folder plugins dan platforms yang mungkin membawa plugin usang
-      - name: Clean old plugins and platforms
+      # 🔥 Bersihkan total jejak plugin usang
+      - name: Clean all traces of old de.appplant plugin
         run: |
-          rm -rf plugins
-          rm -rf platforms
-          echo "Old plugins and platforms removed."
+          sed -i '/de.appplant.cordova.plugin.local-notification/d' config.xml
+          sed -i '/de.appplant.cordova.plugin.local-notification/d' package.json
+          rm -rf plugins platforms
+          echo "Old plugin references completely removed."
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
