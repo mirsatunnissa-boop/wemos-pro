@@ -26,14 +26,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      # ✨ Bersihkan referensi plugin lokal-notifikasi usang di config.xml
-      - name: Remove old local-notification plugin from config.xml
+      # 🔥 Hapus folder plugins dan platforms yang mungkin membawa plugin usang
+      - name: Clean old plugins and platforms
         run: |
-          # Hapus tag <plugin> yang mengandung nama plugin usang
-          sed -i '/<plugin name="de.appplant.cordova.plugin.local-notification"/d' config.xml
-          # Hapus juga jika ada referensi di tag <feature> (biasanya ikut terhapus oleh Cordova)
-          # Optional: pastikan tidak ada plugin lain yang salah
-          echo "config.xml cleaned from old local notification plugin."
+          rm -rf plugins
+          rm -rf platforms
+          echo "Old plugins and platforms removed."
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -67,7 +65,7 @@ jobs:
           cordova plugin add cordova-plugin-splashscreen
           cordova plugin add cordova-plugin-ionic-webview
           cordova plugin add cordova-plugin-ionic-keyboard
-          cordova plugin add cordova-plugin-local-notifications   # ← pastikan nama persis ini
+          cordova plugin add cordova-plugin-local-notifications
           cordova plugin add cordova-plugin-background-mode
           cordova plugin add cordova-plugin-network-information
           cordova plugin add cordova-plugin-app-version
